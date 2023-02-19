@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const conn = require("./configDB/conn");
 const modelFruits = require("./model/main");
+
+const PORT = process.env.PORT || 3000;
 // Send all fruits
 app.get("/fruits", (req, res) => {
   modelFruits
@@ -12,6 +14,6 @@ app.get("/fruits", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.listen(`0.0.0.0:$PORT` || 3000, () => {
-  console.log("Server is ON");
+app.listen(PORT, () => {
+  console.log("Server is ON in port:" + PORT);
 });
