@@ -12,6 +12,6 @@ app.get("/fruits", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.listen(process.env.$PORT || 3000, () => {
+app.listen(`0.0.0.0:$PORT` || 3000, () => {
   console.log("Server is ON");
 });
