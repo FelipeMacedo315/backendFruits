@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-const URL_DATABASE = "mongodb://127.0.0.1:27017/produtos";
+require("dotenv").config();
+const URL_DATABASE = `mongodb+srv://felipe:${process.env.DBPASSWORD}@cluster0.gylfsdj.mongodb.net/DishoDB?retryWrites=true&w=majority`;
 
 mongoose.set("strictQuery", true);
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(URL_DATABASE);
 
 module.export = mongoose;
