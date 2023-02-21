@@ -4,5 +4,5 @@ const URL_DATABASE = `mongodb+srv://felipe:${process.env.DBPASSWORD}@cluster0.gy
 
 mongoose.set("strictQuery", true);
 mongoose.connect(URL_DATABASE);
-
+console.log(process.env.DBPASSWORD);
 module.export = mongoose;
