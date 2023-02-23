@@ -5,5 +5,4 @@ const URL_DATABASE = `mongodb+srv://felipe:${senha}@cluster0.gylfsdj.mongodb.net
 
 mongoose.set("strictQuery", true);
 mongoose.connect(URL_DATABASE);
-console.log("senha database:" + senha);
 module.export = mongoose;
