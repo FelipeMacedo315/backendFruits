@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-const URL_DATABASE = `mongodb+srv://felipe:${process.env.DBPASSWORD}@cluster0.gylfsdj.mongodb.net/DishoDB?retryWrites=true&w=majority`;
+let senha = process.env.DBPASSWORD || process.env.MONGOPASSWORD;
+const URL_DATABASE = `mongodb+srv://felipe:${senha}@cluster0.gylfsdj.mongodb.net/DishoDB?retryWrites=true&w=majority`;
 
 mongoose.set("strictQuery", true);
 mongoose.connect(URL_DATABASE);
-console.log(process.env.DBPASSWORD);
+console.log("senha database:" + senha);
 module.export = mongoose;
