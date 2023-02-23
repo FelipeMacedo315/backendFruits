@@ -8,5 +8,19 @@
   },
   "scripts": {
     "start": "node index.js"
-  }
+  },
+  "description": "Backend do ecomerce de fruits",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelipeMacedo315/backendFruits.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FelipeMacedo315/backendFruits/issues"
+  },
+  "homepage": "https://github.com/FelipeMacedo315/backendFruits#readme"
 }
