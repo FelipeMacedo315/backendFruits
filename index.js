@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors());
 const conn = require("./configDB/conn");
 const modelFruits = require("./model/main");
 

@@ -1,6 +1,7 @@
 {
   "name": "backend_disho",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.8.4",
@@ -12,7 +13,6 @@
   "description": "Backend do ecomerce de fruits",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FelipeMacedo315/backendFruits.git"
