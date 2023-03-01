@@ -11,8 +11,12 @@ const cerealsModel = require("./model/cereals");
 const PORT = process.env.PORT || 3000;
 // Send all fruits
 app.get("/DishoApi/fruits", (req, res) => {
+  const limit = req.query.limit;
+  const page = req.query.page;
   fruitsModel
     .find({})
+    .limit(limit)
+    .skip(10 * (page - 1))
     .then((data) => {
       res.json(data);
     })
