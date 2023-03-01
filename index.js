@@ -16,25 +16,33 @@ app.get("/DishoApi/fruits", (req, res) => {
   fruitsModel
     .find({})
     .limit(limit)
-    .skip(10 * (page - 1))
+    .skip((page - 1) * limit)
     .then((data) => {
-      res.json(data);
+      res.status(200).json({ currentPage: page, products: data });
     })
     .catch((err) => console.log(err));
 });
 app.get("/DishoApi/vegetables", (req, res) => {
+  const limit = req.query.limit;
+  const page = req.query.page;
   vegetablesModel
     .find({})
+    .limit(limit)
+    .skip((page - 1) * limit)
     .then((data) => {
-      res.json(data);
+      res.status(200).json({ currentPage: page, products: data });
     })
     .catch((err) => console.log(err));
 });
 app.get("/DishoApi/cereals", (req, res) => {
+  const limit = req.query.limit;
+  const page = req.query.page;
   cerealsModel
     .find({})
+    .limit(limit)
+    .skip((page - 1) * limit)
     .then((data) => {
-      res.json(data);
+      res.status(200).json({ currentPage: page, products: data });
     })
     .catch((err) => console.log(err));
 });
