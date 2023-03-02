@@ -11,7 +11,7 @@ const cerealsModel = require("./model/cereals");
 const PORT = process.env.PORT || 3000;
 // Send all fruits
 app.get("/DishoApi/fruits", (req, res) => {
-  const limit = req.query.limit;
+  const limit = 10;
   const page = req.query.page;
   fruitsModel
     .find({})
@@ -23,7 +23,7 @@ app.get("/DishoApi/fruits", (req, res) => {
     .catch((err) => console.log(err));
 });
 app.get("/DishoApi/vegetables", (req, res) => {
-  const limit = req.query.limit;
+  const limit = 10;
   const page = req.query.page;
   vegetablesModel
     .find({})
@@ -35,7 +35,7 @@ app.get("/DishoApi/vegetables", (req, res) => {
     .catch((err) => console.log(err));
 });
 app.get("/DishoApi/cereals", (req, res) => {
-  const limit = req.query.limit;
+  const limit = 10;
   const page = req.query.page;
   cerealsModel
     .find({})
