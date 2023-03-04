@@ -15,13 +15,22 @@ app.get("/DishoApi/fruits", (req, res) => {
   const limit = 10;
   const page = req.query.page;
   var totalProducts;
-  const count = fruitsModel.find({}).then((result) => (totalProducts = result.length));
+  var totalPages;
+  const count = fruitsModel.find({}).then((result) => {
+    totalProducts = result.length;
+    totalPages = Math.ceil(totalProducts / limit);
+  });
   fruitsModel
     .find({})
     .limit(limit)
     .skip((page - 1) * limit)
     .then((data) => {
-      res.status(200).json({ currentPage: page, totalItems: totalProducts, products: data });
+      res.status(200).json({
+        currentPage: page,
+        nextPage: totalPages,
+        totalItems: totalProducts,
+        products: data,
+      });
     })
     .catch((err) => console.log(err));
 });
@@ -30,13 +39,22 @@ app.get("/DishoApi/vegetables", (req, res) => {
   const limit = 10;
   const page = req.query.page;
   var totalProducts;
-  const count = vegetablesModel.find({}).then((result) => (totalProducts = result.length));
+  var totalPages;
+  const count = vegetablesModel.find({}).then((result) => {
+    totalProducts = result.length;
+    totalPages = Math.ceil(totalProducts / limit);
+  });
   vegetablesModel
     .find({})
     .limit(limit)
     .skip((page - 1) * limit)
     .then((data) => {
-      res.status(200).json({ currentPage: page, totalItems: totalProducts, products: data });
+      res.status(200).json({
+        currentPage: page,
+        nextPage: totalPages,
+        totalItems: totalProducts,
+        products: data,
+      });
     })
     .catch((err) => console.log(err));
 });
@@ -45,13 +63,22 @@ app.get("/DishoApi/cereals", (req, res) => {
   const limit = 10;
   const page = req.query.page;
   var totalProducts;
-  const count = cerealsModel.find({}).then((result) => (totalProducts = result.length));
+  var totalPages;
+  const count = cerealsModel.find({}).then((result) => {
+    totalProducts = result.length;
+    totalPages = Math.ceil(totalProducts / limit);
+  });
   cerealsModel
     .find({})
     .limit(limit)
     .skip((page - 1) * limit)
     .then((data) => {
-      res.status(200).json({ currentPage: page, totalItems: totalProducts, products: data });
+      res.status(200).json({
+        currentPage: page,
+        nextpages: totalPages,
+        totalItems: totalProducts,
+        products: data,
+      });
     })
     .catch((err) => console.log(err));
 });
