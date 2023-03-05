@@ -11,15 +11,14 @@ const cerealsModel = require("./model/cereals");
 const PORT = process.env.PORT || 3000;
 // Send all fruits
 
-app.get("/DishoApi/fruits", (req, res) => {
+app.get("/DishoApi/fruits", async (req, res) => {
   const limit = 10;
   const page = req.query.page;
-  var totalProducts;
-  var totalPages;
-  const count = fruitsModel.find({}).then((result) => {
-    totalProducts = result.length;
-    totalPages = Math.ceil(totalProducts / limit);
-  });
+
+  const count = await fruitsModel.find({});
+  let totalProducts = count.length;
+  let totalPages = Math.ceil(totalProducts / limit);
+
   fruitsModel
     .find({})
     .limit(limit)
@@ -35,15 +34,14 @@ app.get("/DishoApi/fruits", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.get("/DishoApi/vegetables", (req, res) => {
+app.get("/DishoApi/vegetables", async (req, res) => {
   const limit = 10;
   const page = req.query.page;
-  var totalProducts;
-  var totalPages;
-  const count = vegetablesModel.find({}).then((result) => {
-    totalProducts = result.length;
-    totalPages = Math.ceil(totalProducts / limit);
-  });
+
+  const count = await vegetablesModel.find({});
+  let totalProducts = count.length;
+  let totalPages = Math.ceil(totalProducts / limit);
+
   vegetablesModel
     .find({})
     .limit(limit)
@@ -59,15 +57,14 @@ app.get("/DishoApi/vegetables", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.get("/DishoApi/cereals", (req, res) => {
+app.get("/DishoApi/cereals", async (req, res) => {
   const limit = 10;
   const page = req.query.page;
-  var totalProducts;
-  var totalPages;
-  const count = cerealsModel.find({}).then((result) => {
-    totalProducts = result.length;
-    totalPages = Math.ceil(totalProducts / limit);
-  });
+
+  const count = await cerealsModel.find({});
+  let totalProducts = count.length;
+  let totalPages = Math.ceil(totalProducts / limit);
+
   cerealsModel
     .find({})
     .limit(limit)
