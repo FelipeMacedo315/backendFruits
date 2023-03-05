@@ -75,7 +75,7 @@ app.get("/DishoApi/cereals", (req, res) => {
     .then((data) => {
       res.status(200).json({
         currentPage: page,
-        nextpages: totalPages,
+        nextPage: totalPages,
         totalItems: totalProducts,
         products: data,
       });
