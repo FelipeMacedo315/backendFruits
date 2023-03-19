@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fruitsModel = require("../model/fruitsModel");
+
 router.get("/DishoApi/fruits", async (req, res) => {
   const limit = 10;
   const page = req.query.page;
@@ -41,6 +42,12 @@ router.get("/DishoApi/fruits/filter", async (req, res) => {
         currentPage: page,
       });
     });
+});
+
+router.get("/DishoApi/fruits/:id", async (req, res) => {
+  const { id } = req.params;
+  const product = await fruitsModel.findById(id);
+  res.json(product);
 });
 
 module.exports = router;

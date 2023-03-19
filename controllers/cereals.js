@@ -44,4 +44,10 @@ router.get("/DishoApi/cereals/filter", async (req, res) => {
     });
 });
 
+router.get("/DishoApi/cereals/:id", async (req, res) => {
+  const { id } = req.params;
+  const product = await cerealsModel.findById(id);
+  res.json(product);
+});
+
 module.exports = router;
