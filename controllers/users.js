@@ -34,11 +34,23 @@ router.post("/DishoApi/User/Login", async (req, res) => {
     : res.status(400).json({ msg: "Usuário não encontrado" });
 });
 
+// See all product are in cart
+router.get("/DishoApi/User/get-cart/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const userData = await Users.findById({ _id: userId });
+  const totalValueBuy = userData.cart
+    .map((item) => {
+      return item.priceItem * item.qtd;
+    })
+    .reduce((oldValue, currentValue) => oldValue + currentValue, 0)
+    .toFixed(2);
+  res.status(200).json({ totalValueBuy, cart: userData.cart });
+});
+
 // SET PRODUCT IN CART
-router.post("/DishoApi/User/set-cart/:userId", async (req, res) => {
+router.put("/DishoApi/User/set-cart/:userId", async (req, res) => {
   const userId = req.params.userId;
   const item = req.body;
-
   // verificar se já existe um item igual no carrinho
   const findUser = await Users.findById({ _id: userId });
   const oldCart = findUser.cart;
@@ -57,20 +69,16 @@ router.post("/DishoApi/User/set-cart/:userId", async (req, res) => {
   }
 });
 
-// See all product are in cart
-router.get("/DishoApi/User/get-cart/:userId", async (req, res) => {
+router.delete("/DishoApi/User/delet-cart/:userId", async (req, res) => {
   const userId = req.params.userId;
-  const userData = await Users.findById({ _id: userId });
-  const totalValueBuy = userData.cart
-    .map((item) => {
-      return item.priceItem * item.qtd;
-    })
-    .reduce((oldValue, currentValue) => {
-      return oldValue + currentValue;
-    })
-    .toFixed(2);
-
-  res.status(200).json({ totalValueBuy, cart: userData.cart });
+  const { idItem } = req.body;
+  const findUser = await Users.findById({ _id: userId });
+  const oldCart = findUser.cart;
+  const idxItem = oldCart.findIndex((element) => element.idItem === idItem);
+  oldCart.splice(idxItem, 1);
+  const carrinhoNovo = [...oldCart];
+  const updateCart = await Users.findById({ _id: userId }).updateOne({ cart: carrinhoNovo });
+  res.send(oldCart);
 });
 
 module.exports = router;
