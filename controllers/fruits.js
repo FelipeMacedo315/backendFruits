@@ -5,7 +5,6 @@ const fruitsModel = require("../model/fruitsModel");
 router.get("/DishoApi/fruits", async (req, res) => {
   const limit = 10;
   const page = req.query.page;
-
   const count = await fruitsModel.find({});
   let totalProducts = count.length;
   let totalPages = Math.ceil(totalProducts / limit);
@@ -27,7 +26,6 @@ router.get("/DishoApi/fruits", async (req, res) => {
 
 router.get("/DishoApi/fruits/filter", async (req, res) => {
   const { nameItem, maxPrice, page } = req.query;
-
   const filterPrice = await fruitsModel
     .find()
     .where("price")
@@ -36,7 +34,7 @@ router.get("/DishoApi/fruits/filter", async (req, res) => {
     .then((product) => {
       const filterName = product.filter((item) => item.name.includes(nameItem));
       res.status(200).json({
-        nextPage: Math.ceil(product.length / 10),
+        nextPage: Math.ceil(filterName.length / 10),
         totalItems: filterName.length,
         products: filterName,
         currentPage: page,
