@@ -7,7 +7,7 @@ const vegetablesController = require("./controllers/vegetables");
 const cerealsController = require("./controllers/cereals");
 const usersController = require("./controllers/users");
 const PORT = process.env.PORT || 3000;
-
+app.use(express.json());
 app.use(cors());
 app.use(fruitsController);
 app.use(vegetablesController);
