@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../model/usersModel");
-const jwt = require("jsonwebtoken");
 router.use(express.json());
 
-// User create a count
+// REGISTERED
 router.post("/DishoApi/User/create-user", (req, res) => {
   const { name, email, password } = req.body;
   Users.find({ email }).then((emailDuplicate) => {
@@ -12,20 +11,13 @@ router.post("/DishoApi/User/create-user", (req, res) => {
       res.status(400).json({ msg: "Acesso não autorizado" });
     } else {
       Users.create({ name, email, password }).then((ok) => {
-        // let token = jwt.sign(
-        //   {
-        //     idUser: ok._id,
-        //   },
-        //   "segredo",
-        //   { expiresIn: "1d" }
-        // );
         res.status(200).json({ msg: "Conta criada e usuário autenticado com sucesso!", token: ok._id });
       });
     }
   });
 });
 
-// User login
+// LOGIN
 router.post("/DishoApi/User/Login", async (req, res) => {
   const { email, password } = req.body;
   const existUser = await Users.findOne({ email });
@@ -34,9 +26,10 @@ router.post("/DishoApi/User/Login", async (req, res) => {
     : res.status(400).json({ msg: "Usuário não encontrado" });
 });
 
-// See all product are in cart
+// USER SEE PRODUCT IN CART
 router.get("/DishoApi/User/get-cart/:userId", async (req, res) => {
   const userId = req.params.userId;
+
   const userData = await Users.findById({ _id: userId });
   const totalValueBuy = userData.cart
     .map((item) => {
@@ -68,7 +61,7 @@ router.put("/DishoApi/User/set-cart/:userId", async (req, res) => {
     res.status(200).json({ msg: "Carrinho atualizado" });
   }
 });
-
+// DELETE ITEM IN CART
 router.delete("/DishoApi/User/delet-cart/:userId", async (req, res) => {
   const userId = req.params.userId;
   const { idItem } = req.body;
