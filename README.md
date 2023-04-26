@@ -44,6 +44,8 @@ http://localhost:3000
 
 ## 🛠️ Construído com
 
+<div style="display:flex;justify-content:space-around;align-items:center">
 <img width=40 src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png"> </img> Node.JS
 <img width=40 src="https://user-images.githubusercontent.com/25181517/183859966-a3462d8d-1bc7-4880-b353-e2cbed900ed6.png"> </img> Express.JS
-<img width=40 src="https://user-images.githubusercontent.com/25181517/182884177-d48a8579-2cd0-447a-b9a6-ffc7cb02560e.png"> </img> mongoDb
+<img width=40 src="https://user-images.githubusercontent.com/25181517/182884177-d48a8579-2cd0-447a-b9a6-ffc7cb02560e.png"> </img> mongoDB
+</div>
