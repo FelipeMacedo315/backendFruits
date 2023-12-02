@@ -1,14 +1,18 @@
 const express = require("express");
+const bCrypt = require("bcryptjs");
 const router = express.Router();
 const Users = require("../model/usersModel");
 
 // REGISTERED
 router.post("/DishoApi/User/create-user", (req, res) => {
-  const { name, email, password } = req.body;
+  let { name, email, password } = req.body;
   Users.find({ email }).then((emailDuplicate) => {
     if (emailDuplicate.length) {
       res.status(400).json({ msg: "Acesso não autorizado" });
     } else {
+      const salt = bCrypt.genSaltSync(10);
+      const hash = bCrypt.hashSync(password, salt);
+      password = hash;
       Users.create({ name, email, password }).then((ok) => {
         res.status(200).json({ msg: "Conta criada e usuário autenticado com sucesso!", token: ok._id });
       });
@@ -20,12 +24,13 @@ router.post("/DishoApi/User/create-user", (req, res) => {
 router.post("/DishoApi/User/Login", async (req, res) => {
   const { email, password } = req.body;
   const existUser = await Users.findOne({ email });
-  existUser !== null && existUser.password === password
+  let decoderpassword = bCrypt.compareSync(password, existUser.password);
+  existUser !== null && decoderpassword
     ? res.status(200).json({ msg: `Bem Vindo ${existUser.name}`, token: existUser._id })
-    : res.status(400).json({ msg: "Usuário não encontrado" });
+    : res.status(400).json({ msg: "Usuário não encontrado ou senha inválida" });
 });
 
-// USER SEE PRODUCT IN CART
+// USER SEE PRODUCT IN YOUR CART
 router.get("/DishoApi/User/get-cart/:userId", async (req, res) => {
   const userId = req.params.userId;
 
